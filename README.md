@@ -23,7 +23,6 @@
 - **Frontend**: HTML, CSS, JavaScript, Tailwind CSS
 - **Backend**: Node.js, Express.js
 - **Email Service**: SendGrid
-- **WhatsApp Service**: Twilio API for WhatsApp
 - **Environment Management**: dotenv
 
 ---
@@ -34,4 +33,3 @@
 
 1. **Node.js**: Ensure Node.js is installed on your system. Download it from [here](https://nodejs.org/).
 2. **SendGrid Account**: To send emails, sign up at [SendGrid](https://sendgrid.com/).
-3. **Twilio Account**: To send WhatsApp messages, sign up at [Twilio](https://www.twilio.com/).
