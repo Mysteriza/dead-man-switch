@@ -25,7 +25,11 @@ app.get("/", (req, res) => {
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // Hard-coded email penerima (ProtonMail)
-const RECIPIENTS = ["mysteriza@proton.me"];
+const RECIPIENTS = [
+  "mysteriza@proton.me",
+  "rifqifachriza24@gmail.com",
+  "your.email@gmail.com",
+];
 
 // Endpoint untuk mengirim email
 app.post("/send-action", (req, res) => {
@@ -33,7 +37,7 @@ app.post("/send-action", (req, res) => {
 
   // Validasi data
   if (!text && !filename) {
-    return res.status(400).send("Tidak ada tindakan yang ditentukan.");
+    return res.status(400).send("No action specified.");
   }
 
   // Konversi ArrayBuffer ke Buffer
@@ -50,7 +54,7 @@ app.post("/send-action", (req, res) => {
       };
     } catch (error) {
       console.error("Error converting file content:", error);
-      return res.status(500).send("Gagal memproses file.");
+      return res.status(500).send("Failed to process file.");
     }
   }
 
@@ -65,7 +69,7 @@ app.post("/send-action", (req, res) => {
   sgMail
     .send(msg)
     .then(() => {
-      console.log("Email sent successfully");
+      console.log("Email sent successfully!");
       res.status(200).send("Email sent successfully.");
     })
     .catch((error) => {

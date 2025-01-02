@@ -17,27 +17,27 @@
             <div class="controls space-y-4">
                 <div>
                     <label for="interval"
-                        class="block text-sm font-medium text-gray-700">Set
-                        Interval Check-In:</label>
+                        class="block text-sm font-medium text-gray-700">Preset:</label>
                     <select id="interval"
                         class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm">
-                        <option value="86400">24 Jam</option>
-                        <option value="604800">1 Minggu</option>
-                        <option value="2592000">1 Bulan</option>
+                        <option value="86400">24 Hours</option>
+                        <option value="604800">1 Week</option>
+                        <option value="2592000">1 Month</option>
                         <option value="custom">Custom</option>
                     </select>
                 </div>
                 <div id="customIntervalContainer" class="hidden">
                     <label for="customInterval"
-                        class="block text-sm font-medium text-gray-700">Masukkan
-                        durasi (detik):</label>
+                        class="block text-sm font-medium text-gray-700">Set
+                        duration (second):</label>
                     <input type="number" id="customInterval"
-                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm">
+                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                        placeholder="Enter duration in seconds">
                 </div>
                 <div>
                     <label for="stopDateTime"
-                        class="block text-sm font-medium text-gray-700">Atau set
-                        waktu berhenti:</label>
+                        class="block text-sm font-medium text-gray-700">Custom
+                        Time:</label>
                     <input type="datetime-local" id="stopDateTime"
                         class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm">
                 </div>
@@ -49,11 +49,11 @@
             </div>
             <div class="action mt-6">
                 <label for="actionText"
-                    class="block text-sm font-medium text-gray-700">Tindakan
-                    jika timer habis:</label>
+                    class="block text-sm font-medium text-gray-700">What to do
+                    if time runs out:</label>
                 <textarea id="actionText"
                     class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                    placeholder="Masukkan teks, link, atau instruksi..."></textarea>
+                    placeholder="Enter text, link, instructions, or file to send..."></textarea>
                 <input type="file" id="actionFile"
                     class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                     accept=".txt,.pdf,.doc,.docx">
@@ -68,10 +68,16 @@
             <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
                 <span
                     class="close float-right text-gray-600 cursor-pointer">&times;</span>
-                <h2 class="text-xl font-bold mb-4">Masukkan Password</h2>
-                <input type="password" id="passwordInput"
-                    class="w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                    placeholder="Password">
+                <h2 class="text-xl font-bold mb-4">Enter password!</h2>
+                <div class="relative">
+                    <input type="password" id="passwordInput"
+                        class="w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                        placeholder="Enter password">
+                    <button id="togglePassword"
+                        class="absolute inset-y-0 right-0 px-3 py-2 text-gray-600 hover:text-gray-800">
+                        👁️
+                    </button>
+                </div>
                 <button id="submitPassword"
                     class="w-full bg-blue-500 text-white p-2 rounded-md mt-4 hover:bg-blue-600">Submit</button>
             </div>

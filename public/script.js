@@ -18,8 +18,8 @@ const actionFile = document.getElementById("actionFile");
 const output = document.getElementById("output");
 
 // Password
-const correctPassword = "password123"; // Password yang benar
-const emergencyPassword = "emergency456"; // Password darurat
+const correctPassword = "password123"; // Correct password
+const emergencyPassword = "emergency456"; // Emergency password
 
 // Modal
 const passwordModal = document.getElementById("passwordModal");
@@ -27,18 +27,18 @@ const passwordInput = document.getElementById("passwordInput");
 const submitPasswordBtn = document.getElementById("submitPassword");
 const closeModal = document.getElementsByClassName("close")[0];
 
-// Tampilkan input custom interval jika "Custom" dipilih
+// Show custom interval input if "Custom" is selected
 intervalSelect.addEventListener("change", () => {
   customIntervalContainer.style.display =
     intervalSelect.value === "custom" ? "block" : "none";
 });
 
-// Buka modal saat tombol Check-In diklik
+// Open modal when Check-In button is clicked
 checkinBtn.addEventListener("click", () => {
   passwordModal.style.display = "flex";
 });
 
-// Tutup modal saat tombol close diklik
+// Close modal when close button is clicked
 closeModal.addEventListener("click", () => {
   passwordModal.style.display = "none";
 });
@@ -51,10 +51,19 @@ submitPasswordBtn.addEventListener("click", () => {
     checkIn();
     passwordModal.style.display = "none";
   } else if (enteredPassword === emergencyPassword) {
-    triggerAction("Password darurat digunakan! Kemungkinan ada bahaya.");
+    // Stop the timer and reset the display
+    clearInterval(timer);
+    isRunning = false;
+    startBtn.disabled = false;
+    checkinBtn.disabled = true;
+    timerDisplay.textContent = "00:00:00";
+    output.textContent = "Emergency password used! Timer stopped.";
+
+    // Trigger emergency action
+    triggerAction("HAHAHAHAHAHAHA!.");
     passwordModal.style.display = "none";
   } else {
-    alert("Password salah!");
+    alert("Wrong password!");
   }
 
   passwordInput.value = ""; // Reset input
@@ -63,22 +72,22 @@ submitPasswordBtn.addEventListener("click", () => {
 function startTimer() {
   if (isRunning) return;
 
-  // Ambil interval yang dipilih
+  // Get the selected interval
   if (intervalSelect.value === "custom") {
     interval = parseInt(customIntervalInput.value);
   } else {
     interval = parseInt(intervalSelect.value);
   }
 
-  // Ambil waktu berhenti jika diatur
+  // Get the stop time if set
   if (stopDateTimeInput.value) {
     const stop = new Date(stopDateTimeInput.value);
     const now = new Date();
-    interval = Math.floor((stop - now) / 1000); // Hitung interval dalam detik
+    interval = Math.floor((stop - now) / 1000); // Calculate interval in seconds
   }
 
   if (isNaN(interval) || interval <= 0) {
-    alert("Masukkan durasi yang valid!");
+    alert("Enter a valid duration!");
     return;
   }
 
@@ -86,7 +95,13 @@ function startTimer() {
   isRunning = true;
   startBtn.disabled = true;
   checkinBtn.disabled = false;
-  output.textContent = ""; // Hilangkan pesan reset
+  output.textContent = ""; // Clear reset message
+
+  // Save start time and interval to localStorage
+  const startTime = new Date().getTime();
+  localStorage.setItem("startTime", startTime);
+  localStorage.setItem("interval", interval);
+
   updateTimer();
 
   timer = setInterval(() => {
@@ -95,7 +110,9 @@ function startTimer() {
 
     if (timeLeft <= 0) {
       clearInterval(timer);
-      triggerAction("Timer habis!");
+      triggerAction("Timer runs out!");
+      localStorage.removeItem("startTime"); // Clear saved time
+      localStorage.removeItem("interval"); // Clear saved interval
     }
   }, 1000);
 }
@@ -117,10 +134,14 @@ function checkIn() {
   startBtn.disabled = false;
   checkinBtn.disabled = true;
   timerDisplay.textContent = "00:00:00";
-  output.textContent = "Timer di-reset!";
+  output.textContent = "The timer has been reset!";
+
+  // Clear saved time and interval
+  localStorage.removeItem("startTime");
+  localStorage.removeItem("interval");
 }
 
-async function triggerAction(message = "Tindakan dijalankan!") {
+async function triggerAction(message = "Action executed!") {
   isRunning = false;
   startBtn.disabled = false;
   checkinBtn.disabled = true;
@@ -136,7 +157,7 @@ async function triggerAction(message = "Tindakan dijalankan!") {
     fileContent = await file.arrayBuffer();
   }
 
-  // Kirim data ke backend
+  // Send data to the backend
   try {
     const response = await fetch("http://localhost:3000/send-action", {
       method: "POST",
@@ -146,19 +167,73 @@ async function triggerAction(message = "Tindakan dijalankan!") {
         filename,
         fileContent: fileContent
           ? { data: Array.from(new Uint8Array(fileContent)) }
-          : null, // Konversi ArrayBuffer ke format yang bisa dikirim
+          : null,
       }),
     });
 
     if (response.ok) {
-      output.textContent = "Email dikirim!";
+      output.textContent = "Email sent!";
     } else {
-      output.textContent = "Gagal mengirim email.";
+      output.textContent = "Failed to send email.";
     }
   } catch (error) {
     console.error("Error:", error);
-    output.textContent = "Terjadi kesalahan saat mengirim email.";
+    output.textContent = "An error occurred while sending email.";
   }
 }
+
+// Hide/Show Password
+const togglePassword = document.getElementById("togglePassword");
+
+togglePassword.addEventListener("click", () => {
+  const type =
+    passwordInput.getAttribute("type") === "password" ? "text" : "password";
+  passwordInput.setAttribute("type", type);
+  togglePassword.textContent = type === "password" ? "👁️" : "👁️‍🗨️";
+});
+
+// Confirm Password with Enter
+passwordInput.addEventListener("keypress", (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault(); // Prevent form submission (if any)
+    submitPasswordBtn.click(); // Trigger submit button
+  }
+});
+
+// Check for saved timer on page load
+window.addEventListener("load", () => {
+  const savedStartTime = localStorage.getItem("startTime");
+  const savedInterval = localStorage.getItem("interval");
+
+  if (savedStartTime && savedInterval) {
+    const startTime = parseInt(savedStartTime);
+    const interval = parseInt(savedInterval);
+    const now = new Date().getTime();
+    const elapsedTime = Math.floor((now - startTime) / 1000); // Calculate elapsed time in seconds
+
+    if (elapsedTime < interval) {
+      timeLeft = interval - elapsedTime;
+      isRunning = true;
+      startBtn.disabled = true;
+      checkinBtn.disabled = false;
+
+      timer = setInterval(() => {
+        timeLeft--;
+        updateTimer();
+
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          triggerAction("Timer runs out!");
+          localStorage.removeItem("startTime"); // Clear saved time
+          localStorage.removeItem("interval"); // Clear saved interval
+        }
+      }, 1000);
+    } else {
+      // Timer has already expired
+      localStorage.removeItem("startTime");
+      localStorage.removeItem("interval");
+    }
+  }
+});
 
 startBtn.addEventListener("click", startTimer);
