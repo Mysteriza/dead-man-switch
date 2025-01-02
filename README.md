@@ -2,7 +2,7 @@
 
 ![GitHub](https://img.shields.io/badge/license-MIT-blue)  ![GitHub](https://img.shields.io/badge/status-active-brightgreen)
 
-**Dead Man Switch** is a web application that allows users to set a timer that will automatically send a message via email if the user fails to "check-in" within the specified time. This application is useful for ensuring that important information is delivered even if the user is unable to do so manually.
+**Dead Man Switch** is a web application that allows users to set a timer that will automatically send a message, instruction, or something important to tell your family or loved ones via email if the user fails to "check-in" within the specified time (presumed dead or kidnapped by the government or terrorists). This application is useful for ensuring that important information is delivered even if the user is unable to do so manually.
 
 ---
 
@@ -28,8 +28,21 @@
 ---
 
 ## How to Use
+1. Clone this repository
+```
+git clone https://github.com/Mysteriza/dead-man-switch
+```
+```
+cd dead-man-switch
+```
+```
+npm install
+```
+2. Input your API and email in .env file.
+3. Replace the default password and emergency password in the script.js file (lines 21 and 22).
+4. Replace the recipient email in the server.js file (line 28).
+5. Start with:
+```
+node server.js
+```
 
-### Prerequisites
-
-1. **Node.js**: Ensure Node.js is installed on your system. Download it from [here](https://nodejs.org/).
-2. **SendGrid Account**: To send emails, sign up at [SendGrid](https://sendgrid.com/).
