@@ -46,4 +46,6 @@ npm install
 ```
 node server.js
 ```
+<img src="https://github.com/user-attachments/assets/33c38555-1964-4a2d-bc13-792f407d9000" alt="image" width="400" />
+
 
