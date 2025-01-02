@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dead Man Switch</title>
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body class="bg-gray-100 flex items-center justify-center h-screen">
+        <div
+            class="container bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+            <h1 class="text-2xl font-bold mb-6 text-center">Dead Man Switch</h1>
+            <div class="timer text-4xl font-bold text-center mb-6"
+                id="timer">00:00:00</div>
+            <div class="controls space-y-4">
+                <div>
+                    <label for="interval"
+                        class="block text-sm font-medium text-gray-700">Set
+                        Interval Check-In:</label>
+                    <select id="interval"
+                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm">
+                        <option value="86400">24 Jam</option>
+                        <option value="604800">1 Minggu</option>
+                        <option value="2592000">1 Bulan</option>
+                        <option value="custom">Custom</option>
+                    </select>
+                </div>
+                <div id="customIntervalContainer" class="hidden">
+                    <label for="customInterval"
+                        class="block text-sm font-medium text-gray-700">Masukkan
+                        durasi (detik):</label>
+                    <input type="number" id="customInterval"
+                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm">
+                </div>
+                <div>
+                    <label for="stopDateTime"
+                        class="block text-sm font-medium text-gray-700">Atau set
+                        waktu berhenti:</label>
+                    <input type="datetime-local" id="stopDateTime"
+                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm">
+                </div>
+                <button id="startBtn"
+                    class="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">Start
+                    Timer</button>
+                <button id="checkinBtn" disabled
+                    class="w-full bg-gray-300 text-white p-2 rounded-md cursor-not-allowed">Check-In</button>
+            </div>
+            <div class="action mt-6">
+                <label for="actionText"
+                    class="block text-sm font-medium text-gray-700">Tindakan
+                    jika timer habis:</label>
+                <textarea id="actionText"
+                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                    placeholder="Masukkan teks, link, atau instruksi..."></textarea>
+                <input type="file" id="actionFile"
+                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                    accept=".txt,.pdf,.doc,.docx">
+            </div>
+            <div class="output mt-6 text-center text-red-500 font-bold"
+                id="output"></div>
+        </div>
+
+        <!-- Modal untuk password check-in -->
+        <div id="passwordModal"
+            class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+            <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+                <span
+                    class="close float-right text-gray-600 cursor-pointer">&times;</span>
+                <h2 class="text-xl font-bold mb-4">Masukkan Password</h2>
+                <input type="password" id="passwordInput"
+                    class="w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                    placeholder="Password">
+                <button id="submitPassword"
+                    class="w-full bg-blue-500 text-white p-2 rounded-md mt-4 hover:bg-blue-600">Submit</button>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>
