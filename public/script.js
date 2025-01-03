@@ -169,7 +169,7 @@ async function triggerAction(message = "Action executed!") {
 
   try {
     const response = await fetch(
-      "https://formsubmit.co/ajax/rifqifachriza24@gmail.com",
+      "https://formsubmit.co/ajax/daber2231@gmail.com",
       {
         method: "POST",
         body: formData,
