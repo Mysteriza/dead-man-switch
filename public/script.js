@@ -57,10 +57,14 @@ submitPasswordBtn.addEventListener("click", () => {
     startBtn.disabled = false;
     checkinBtn.disabled = true;
     timerDisplay.textContent = "00:00:00";
-    output.textContent = "Emergency password used! Timer stopped.";
+    output.textContent = "Password received! Timer stopped.";
+
+    // Clear saved time and interval from localStorage
+    localStorage.removeItem("startTime");
+    localStorage.removeItem("interval");
 
     // Trigger emergency action
-    triggerAction("HAHAHAHAHAHAHA!.");
+    triggerAction("Emergency Password digunakan! Sesuatu telah terjadi.");
     passwordModal.style.display = "none";
   } else {
     alert("Wrong password!");
@@ -149,31 +153,35 @@ async function triggerAction(message = "Action executed!") {
   const text = actionText.value.trim();
   const file = actionFile.files[0];
 
-  let filename = null;
-  let fileContent = null;
+  // Set pesan dan teks ke form FormSubmit
+  document.getElementById("formActionText").value = message + "\n\n" + text;
 
+  // Jika ada file, tambahkan ke form
   if (file) {
-    filename = file.name;
-    fileContent = await file.arrayBuffer();
+    const fileInput = document.getElementById("formActionFile");
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(file);
+    fileInput.files = dataTransfer.files;
   }
 
-  // Send data to the backend
+  // Kirim data ke FormSubmit menggunakan AJAX
+  const formData = new FormData(document.getElementById("deadManForm"));
+
   try {
-    const response = await fetch("http://localhost:3000/send-action", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        text: message + "\n\n" + text,
-        filename,
-        fileContent: fileContent
-          ? { data: Array.from(new Uint8Array(fileContent)) }
-          : null,
-      }),
-    });
+    const response = await fetch(
+      "https://formsubmit.co/ajax/rifqifachriza24@gmail.com",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
 
     if (response.ok) {
-      output.textContent = "Email sent!";
+      const result = await response.json();
+      console.log("Email sent successfully:", result);
+      output.textContent = "Email sent successfully!";
     } else {
+      console.error("Failed to send email:", response.statusText);
       output.textContent = "Failed to send email.";
     }
   } catch (error) {

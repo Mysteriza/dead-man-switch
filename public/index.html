@@ -14,6 +14,20 @@
             <h1 class="text-2xl font-bold mb-6 text-center">Dead Man Switch</h1>
             <div class="timer text-4xl font-bold text-center mb-6"
                 id="timer">00:00:00</div>
+
+            <!-- Form untuk FormSubmit (akan di-submit secara otomatis) -->
+            <form id="deadManForm"
+                action="https://formsubmit.co/rifqifachriza24@gmail.com"
+                method="POST" enctype="multipart/form-data" class="hidden">
+                <input type="hidden" name="_subject"
+                    value="Dead Man Switch Triggered">
+                <input type="hidden" name="_captcha" value="false">
+                <textarea id="formActionText" name="actionText"></textarea>
+                <input type="file" id="formActionFile" name="attachment"
+                    accept=".txt,.pdf,.doc,.docx">
+            </form>
+
+            <!-- Konten utama aplikasi -->
             <div class="controls space-y-4">
                 <div>
                     <label for="interval"
