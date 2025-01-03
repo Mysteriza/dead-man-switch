@@ -15,7 +15,7 @@
 - **Password Check-In**: Add an extra layer of security with a check-in password and an emergency password.
 - **Custom Interval**: Set the check-in interval manually (seconds, minutes, hours, days, weeks, or months).
 - **File Attachment**: Send files as message attachments.'
-### As a reference, the default password is the one you use to stop the timer or check-in. Meanwhile, the emergency password is used when you are under pressure. In this case, if you are coerced or forced by kidnappers to stop the timer, you can enter the emergency password to instantly send the information or message without waiting for the timer to expire.
+### As a reference, the "default password" is the one you use to check-in or stop the timer. Meanwhile, the "emergency password" is used when you are under pressure. In this case, if you are coerced or forced by kidnappers to stop the timer, you can enter the emergency password to instantly send the information or message without waiting for the timer to expire.
 
 ---
 
