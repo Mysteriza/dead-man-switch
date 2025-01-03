@@ -179,10 +179,10 @@ async function triggerAction(message = "Action executed!") {
     if (response.ok) {
       const result = await response.json();
       console.log("Email sent successfully:", result);
-      output.textContent = "Email sent successfully!";
+      output.textContent = "Done! Good luck!";
     } else {
       console.error("Failed to send email:", response.statusText);
-      output.textContent = "Failed to send email.";
+      output.textContent = "Failed to send.";
     }
   } catch (error) {
     console.error("Error:", error);
