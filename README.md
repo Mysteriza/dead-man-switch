@@ -4,6 +4,11 @@
 
 **Dead Man Switch** is a web application that allows users to set a timer that will automatically send a message, instruction, or something important to tell your family or loved ones via email if the user fails to "check-in" within the specified time (presumed dead or kidnapped by the government or terrorists). This application is useful for ensuring that important information is delivered even if the user is unable to do so manually.
 
+Example (Can't send email, only for demo):
+[Dead Man Switch](https://dead-man-switch.vercel.app)
+
+- Default Password: password123
+- Emergency Password: emergency456
 ---
 
 ## Key Features
