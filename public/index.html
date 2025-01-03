@@ -55,12 +55,8 @@
                     <input type="datetime-local" id="stopDateTime"
                         class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm">
                 </div>
-                <button id="startBtn"
-                    class="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">Start
-                    Timer</button>
-                <button id="checkinBtn" disabled
-                    class="w-full bg-gray-300 text-white p-2 rounded-md cursor-not-allowed">Check-In</button>
             </div>
+
             <div class="action mt-6">
                 <label for="actionText"
                     class="block text-sm font-medium text-gray-700">What to do
@@ -72,6 +68,14 @@
                     class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                     accept=".txt,.pdf,.doc,.docx">
             </div>
+
+            <!-- Tombol Start Timer dan Check-In dipindahkan ke bawah -->
+            <button id="startBtn"
+                class="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 mt-6">Start
+                Timer</button>
+            <button id="checkinBtn" disabled
+                class="w-full bg-gray-300 text-white p-2 rounded-md cursor-not-allowed mt-4">Check-In</button>
+
             <div class="output mt-6 text-center text-red-500 font-bold"
                 id="output"></div>
         </div>

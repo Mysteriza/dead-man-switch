@@ -56,6 +56,8 @@ submitPasswordBtn.addEventListener("click", () => {
     isRunning = false;
     startBtn.disabled = false;
     checkinBtn.disabled = true;
+    checkinBtn.classList.remove("bg-green-500", "hover:bg-green-600");
+    checkinBtn.classList.add("bg-gray-300", "cursor-not-allowed");
     timerDisplay.textContent = "00:00:00";
     output.textContent = "Password received! Timer stopped.";
 
@@ -97,8 +99,10 @@ function startTimer() {
 
   timeLeft = interval;
   isRunning = true;
-  startBtn.disabled = true;
-  checkinBtn.disabled = false;
+  startBtn.disabled = true; // Disable Start button
+  checkinBtn.disabled = false; // Enable Check-In button
+  checkinBtn.classList.remove("bg-gray-300", "cursor-not-allowed"); // Remove disabled styles
+  checkinBtn.classList.add("bg-green-500", "hover:bg-green-600"); // Add active styles
   output.textContent = ""; // Clear reset message
 
   // Save start time and interval to localStorage
@@ -135,8 +139,10 @@ function checkIn() {
 
   clearInterval(timer);
   isRunning = false;
-  startBtn.disabled = false;
-  checkinBtn.disabled = true;
+  startBtn.disabled = false; // Enable Start button
+  checkinBtn.disabled = true; // Disable Check-In button
+  checkinBtn.classList.remove("bg-green-500", "hover:bg-green-600"); // Remove active styles
+  checkinBtn.classList.add("bg-gray-300", "cursor-not-allowed"); // Add disabled styles
   timerDisplay.textContent = "00:00:00";
   output.textContent = "The timer has been reset!";
 
@@ -149,6 +155,8 @@ async function triggerAction(message = "Action executed!") {
   isRunning = false;
   startBtn.disabled = false;
   checkinBtn.disabled = true;
+  checkinBtn.classList.remove("bg-green-500", "hover:bg-green-600");
+  checkinBtn.classList.add("bg-gray-300", "cursor-not-allowed");
 
   const text = actionText.value.trim();
   const file = actionFile.files[0];
@@ -179,10 +187,10 @@ async function triggerAction(message = "Action executed!") {
     if (response.ok) {
       const result = await response.json();
       console.log("Email sent successfully:", result);
-      output.textContent = "Done! Good luck!";
+      output.textContent = "Done! Good Luck!";
     } else {
       console.error("Failed to send email:", response.statusText);
-      output.textContent = "Failed to send.";
+      output.textContent = "Failed to send email.";
     }
   } catch (error) {
     console.error("Error:", error);
@@ -224,6 +232,8 @@ window.addEventListener("load", () => {
       isRunning = true;
       startBtn.disabled = true;
       checkinBtn.disabled = false;
+      checkinBtn.classList.remove("bg-gray-300", "cursor-not-allowed");
+      checkinBtn.classList.add("bg-green-500", "hover:bg-green-600");
 
       timer = setInterval(() => {
         timeLeft--;
