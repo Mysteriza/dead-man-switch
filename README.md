@@ -41,7 +41,8 @@ git clone https://github.com/Mysteriza/dead-man-switch
 cd dead-man-switch
 ```
 2. Replace the email with your own email address in the script.js file (line 171).
-3. Then run it with a local server to ensure the email function works properly. Or you can host it to Vercel.
+3. Replace the random-like code with your own email address in the index.html file (line 20)
+4. Then run it with a local server to ensure the email function works properly. Or you can host it to Vercel.
 
 <img src="https://github.com/user-attachments/assets/33c38555-1964-4a2d-bc13-792f407d9000" alt="image" width="400" />
 
